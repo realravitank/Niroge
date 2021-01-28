@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} meal_results {% endblock %}
+{% block content %} 
+
+
+<h2 class="p-4 pt-4" style="background-color:rgb(166, 196, 252); font-family: sans-serif; text-align: center;">{{title}}</h2>
+
+
+<div class="container">
+
+<div class="row">
+<div class="col-sm-4">
+
+<h4 class="mb-4"> Overview </h4>
+<h5>Calories: {{nut_details['calories']}}Kcal</h5>
+<h5>Carbohydrade: {{nut_details['carbs']}}</h5>
+<h5>Fat: {{nut_details['fat']}}</h5>
+<h5>Protein: {{nut_details['protein']}}</h5>
+
+</div>
+
+<div class="col-sm-4">
+    <h4 class="mb-4"> Ingredients </h4>
+    {% for ing in ing_data['ingredients'] %}
+            <h5>{{ing['name'].capitalize()}}</h5>
+            <span>- {{ing['amount']['metric']['value']}}</span>
+            <span>{{ing['amount']['metric']['unit']}}</span>
+            <h5 class="mt-3"></h5>
+    {% endfor %}
+    <br>
+    <h5 class="mt-1">Total Cost: {{ing_data['totalCost']/10}}</h5>
+</div>
+
+<div class="col-sm-4">
+<h4 class="mb-4"> Instructions </h4>
+{% for step in rec_data[0]['steps'] %}
+
+<h5>- {{step['step']}}</h5>
+
+{% endfor %}
+</div>
+
+<form style="display: inline;" method="POST">
+    <button style="display: inline;" class="btn btn-primary btn-lg ml-2 mb-4">Add Meal</button>
+</form>
+</div>
+
+</div>
+
+{% endblock %}

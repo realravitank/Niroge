@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} home {% endblock %}
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+
+<a style="text-decoration: none;" href="/meals/{{user.id}}">
+<div class="m-4" style="background-color: rgb(166, 196, 252); width: 34rem; height: 80px; border-radius: 5px;">
+
+    <h1 class="text-dark" style="font-family: sans-serif;text-align: center; padding-top: 16px;">Calories Remaining: <span id = "home_calories">{{calorie}}</span></h1>
+
+</div>
+</a>
+
+<a class="ml-4 mt-1 btn btn-primary" href="/meal/search/{{user.id}}">Add Meal</a>
+<a class="ml-4 mt-1 btn btn-info" href="/meals/{{user.id}}">My Meals</a>
+<a class="ml-4 mt-1 btn btn-success" href="/weight/{{user.id}}">Record Weight</a>
+
+{% endblock %}

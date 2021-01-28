@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} settings {% endblock %}
+{% block content %} 
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+
+<div class="m-4" style="background-color: rgb(166, 196, 252); width: 34rem; height: 80px; border-radius: 5px;">
+
+  <h1 class="text-dark" style="font-family: sans-serif;text-align: center; padding-top: 16px;">Calories Remaining: <span>{{calorie}}</span></h1>
+
+</div>
+
+<div class="container">
+  <div class="row">
+
+  <div class="col-10">
+  {% for meal in meals['results'] %}
+ 
+<ul style="list-style: none;">
+<li>
+
+<a style="text-decoration: none;" class="text-dark"href="/meal/details/{{meal['id']}}">
+  <img style="width:200px;" src={{meal['image']}}>
+   <h4 style="display: inline;">{{ meal['title'] }}</h4>
+     <span class="m-2">{{meal['nutrition']['nutrients'][0]['amount']}} Cals</span>
+   
+</a>
+
+</li>
+</ul>
+
+  {% endfor %}
+
+</div>
+
+  
+  </div>
+  <a href=/meal/search/{{user.id}} class="btn btn-primary mt-4">Back</a>
+
+</div>
+{% endblock %}

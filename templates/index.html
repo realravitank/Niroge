@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %} index {% endblock %}
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+
+<div class="container-fluid mt-2 mx-3" >
+
+  <div class="row">
+
+    <div class= "col-sm-4" >
+      <h2 class="join-message">Login</h2>
+
+      <form method="POST" id="user_form">
+        {{ form.hidden_tag() }} 
+        {% for field in form if field.widget.input_type != 'hidden' %} 
+          <p>
+            {{ field.label }}
+            {{ field(class="form-control") }}
+      
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          </p>    
+        {% endfor %}    
+        <button class="btn btn-primary btn-block btn-lg mt-2">Log in</button>
+      </form>
+
+      <form method="POST" action="/goals">
+        <button class="btn btn-primary btn-success mt-4">Create New Account</button>
+      </form>
+    </div>
+
+    <div class="col-sm-8 d-inline-flex justify-content-center">
+
+    <img class="image" style="width: auto; height: 269px;" src="/static/index.png">  
+
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

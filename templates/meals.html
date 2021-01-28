@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} meals {% endblock %}
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+
+<div class="m-4" style="background-color: rgb(166, 196, 252); width: 34rem; height: 80px; border-radius: 5px;">
+
+    <h1 class="text-dark" style="font-family: sans-serif;text-align: center; padding-top: 16px;">Calories Remaining: <span id = "home_calories">{{calorie}}</span></h1>
+
+</div>
+
+<div class="m-4">
+
+{% for meal in user.meal %}
+
+<ul style="list-style: none;"><li>
+    <a class="text-dark" style = "text-decoration: none;" href="/meal/details/{{meal.id}}">
+        <h4 style="display: inline;">{{meal.name}} </h4>
+        <span id="meal_calories"> {{meal.calories}} cals</span>  
+    <br>
+    <span id="meal_calories"> ${{meal.price}}</span>
+<br>
+    <span class="text-muted">{{ meal.timestamp.strftime('%d %B %Y') }}</span>
+</a> 
+
+<form style="display: inline;" method="post" action="/meal/delete/{{meal.id}}">
+    <button class="btn btn-sm btn-danger">Delete</button> 
+</form>
+</li></ul>
+
+
+
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} user_details {% endblock %}
+{% block content %} 
+
+
+<div class="m-4 container" style="width: 60%;" id="profile">
+    
+
+    <div class="row">
+        
+        <div class="col-sm-4">
+            <h2>{{user.name}}'s profile</h2>
+            <p>{{user.age}} years old</p>
+            <p id="user_sex">{{user.sex}}</p>
+        </div>
+
+        <div class=" mt-2 col-sm-8">
+            <h5>Email: {{user.email}}</h5>
+            <p id="goal">Goal: {{user.goal}}</p>
+
+
+          {% if user.unit == 'met' %}
+
+            <p id="weight">Weight: {{(user.weight/2.2)|round|int}} kg</p>
+            <p id="goal_weight">Goal Weight: {{(user.goal_weight/2.2)|round|int}} kg</p>
+
+          {% elif user.unit == 'imp' %}
+
+            <p id="weight">Weight: {{user.weight}} lbs</p>
+            <p id="goal_weight">Goal Weight: {{user.goal_weight}} lbs</p>
+
+          {% endif %}
+
+            <p id="activity">Activity: {{user.activity}}</p>
+            <p id="rate">Rate: {{user.rate}}</p>
+            <p id="diet_type">Diet Type: {{user.diet_type}}</p>
+            <p id="budget">Budget: ${{user.budget}}   <span class="text-muted">(${{remain}} remaining)</span></p>           
+
+            <a href="/edit/{{user.id}}" class="btn btn-success btn-sm">Edit Profile</a>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

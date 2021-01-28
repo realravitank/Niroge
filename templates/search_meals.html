@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} search_meal {% endblock %}
+{% block content %} 
+
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+
+<div class="row justify-content-md-center m-4">
+  <div class="col-md-7 col-lg-5">
+    <h2 class="join-message" style="font-family: sans-serif; text-align: center;">Search Meals</h2>
+
+<form method="POST" id="search_meal_form">
+  {{ form.hidden_tag() }} 
+
+  {% for field in form if field.widget.input_type != 'hidden' %}
+
+    <p>
+      {{ field.label }}
+      {{ field(class="form-control") }}
+      <span>
+        {% if field.errors %}
+          {% for error in field.errors %}
+          <span class="text-danger">{{ error }}</span>      
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
+
+  {% endfor %}
+
+  <button class="btn btn-primary btn-success mt-2">Search</button>
+ </form>
+
+{% endblock %}
